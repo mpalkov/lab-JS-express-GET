@@ -16,6 +16,9 @@
 // and with another JS file you need to make a request to your server and get the data back
 
 // BONUS:: ADD CSS and super fancy styling
+
+console.log("index.js OK");
+
 const DATA = `[
     {
         "name": "Rick Sanchez",
@@ -59,16 +62,13 @@ const DATA = `[
     }
 ]`;
 
-//const jsonFile = DATA.stringify();
-
-console.log("index.js OK");
-
-//middleware
 const cors = require('cors');
 const express = require("express");
 const server = express();
 server.use(cors());
 
+// MIDDLEWARE way of writing it:
+// server.get("/", cors(), (request, response) => {
 server.get("/", (request, response) => {
     response.send(DATA);
 });
