@@ -16,3 +16,33 @@
 // and with another JS file you need to make a request to your server and get the data back
 
 // BONUS:: ADD CSS and super fancy styling
+
+const btnElement = document.querySelector("#btn");
+
+btnElement.addEventListener('click', populateCharacters);
+
+console.log("JS running");
+
+const ulElement = document.querySelector("#the-list");
+
+const fillList = (list) => {
+    for (i = 0; i < list.length; i++) {
+        const newItem = document.createElement("li");
+        newItem.innerHTML = `<h3>${list[i].name}</h3><img src="${list[i].image}" alt="${list[i].name}">`;
+        ulElement.appendChild(newItem);
+        console.log("appending ", newItem);
+    }
+}
+
+async function populateCharacters() {
+    try {   
+        const response = await fetch("http://localhost:3000");
+        const characterList = await response.json();
+        console.log(characterList);
+        fillList(characterList);
+        console.log("Fetch done");
+    }
+    catch (error) {
+        console.log("ERROR: ", error);
+    }
+}
